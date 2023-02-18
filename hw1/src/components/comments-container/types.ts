@@ -1,5 +1,3 @@
-import { RequestDataContainerProps } from "../../global-types";
-
 export type Comments = {
   postId: number,
   id: number,
@@ -7,5 +5,3 @@ export type Comments = {
   email: string,
   body: string,
 };
-
-export type CommentsContainerProps = RequestDataContainerProps;

@@ -1,21 +1,24 @@
 import { FC } from "react";
+import { useDataContext } from "../../context/data-context";
+import { useThemeContext } from "../../context/theme-context";
 import { DataItem } from "../data-item";
-import { DeleteButton } from "../delete-button";
-import { Post, PostsContainerProps } from "./types";
+import { Post } from "./types";
 
-export const PostsContainer: FC<PostsContainerProps> = ({ data }) => {
+export const PostsContainer: FC = () => {
+  const { data } = useDataContext<Post>();
+  const { themeMode } = useThemeContext();
+
   return (
     <>
       {
-        data.map((post: Post, index) => (
-          <DataItem index={index} key={index}>
-            <p className='post-title'>{post.title}</p>
-            <p className='post-body'>{post.body}</p>
+        data.map(({ recordId, title, body, userId, id }) => (
+          <DataItem key={recordId} recordId={recordId}>
+            <p className={`post-title text-${themeMode}`}>{title}</p>
+            <p className={`post-body text-${themeMode}`}>{body}</p>
             <div className='data-user-id'>
-              <p className='small-text'>User's id: {post.userId}</p>
-              <p className='small-text'>Post №{post.id}</p>
+              <p className='small-text'>User's id: {userId}</p>
+              <p className='small-text'>Post №{id}</p>
             </div>
-            <DeleteButton data={data} />
           </DataItem>
         ))
       }

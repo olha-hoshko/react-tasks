@@ -6,3 +6,8 @@ export enum RequestTypes {
   todos = 'todos',
   users = 'users',
 };
+
+export enum ThemeModes {
+  dark = 'dark', 
+  light = 'light',
+};

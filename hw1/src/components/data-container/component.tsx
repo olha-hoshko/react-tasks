@@ -1,34 +1,35 @@
-import { useDataContext } from "../../context";
+import { useDataContext } from "../../context/data-context";
+import { useThemeContext } from "../../context/theme-context";
 import { RequestTypes } from "../../enums";
 import { AlbumsContainer } from "../albums-container";
 import { CommentsContainer } from "../comments-container";
-import { DataItem } from "../data-item";
-import { DeleteButton } from "../delete-button";
+import { DefaultRequestItemContainer } from "../default-request-item-container";
 import { PostsContainer } from "../posts-container";
 
 export const DataContainer = () => {
-  const { requestType, data } = useDataContext();
+  const { requestType } = useDataContext();
+  const { themeMode } = useThemeContext();
+
+  const switchRequestItem = () => {
+    switch (requestType) {
+      case RequestTypes.posts:
+        return <PostsContainer />;
+      case RequestTypes.comments:
+        return <CommentsContainer />
+      case RequestTypes.albums:
+        return <AlbumsContainer />
+      case RequestTypes.photos:
+      case RequestTypes.todos:
+      case RequestTypes.users:
+        return <DefaultRequestItemContainer />
+    }
+  }
 
   return (
-    <div className='data-container'>
+    <div className={`data-container-${themeMode}`}>
       <div>
         {
-          requestType === RequestTypes.posts && <PostsContainer data={data} />
-        }
-        {
-          requestType === RequestTypes.comments && <CommentsContainer data={data} />
-        }
-        {
-          requestType === RequestTypes.albums && <AlbumsContainer data={data} />
-        }
-        {
-          (requestType === RequestTypes.photos || requestType === RequestTypes.todos || requestType === RequestTypes.users) &&
-          data.map((elem, index) => (
-            <DataItem index={index} key={index}>
-              <p className='post-body'>{JSON.stringify(elem)}</p>
-              <DeleteButton data={data} />
-            </DataItem>
-          ))
+          switchRequestItem()
         }
       </div>
     </div>

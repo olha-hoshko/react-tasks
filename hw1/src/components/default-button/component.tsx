@@ -1,5 +1,5 @@
 import { FC, MouseEventHandler } from "react";
-import { useDataContext } from "../../context";
+import { useDataContext } from "../../context/data-context";
 import { buttonNames } from "./config";
 import { DefaultButtonProps } from "./types";
 

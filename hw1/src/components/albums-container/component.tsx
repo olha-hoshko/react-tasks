@@ -1,20 +1,23 @@
 import { FC } from "react";
+import { useDataContext } from "../../context/data-context";
+import { useThemeContext } from "../../context/theme-context";
 import { DataItem } from "../data-item";
-import { DeleteButton } from "../delete-button";
-import { Albums, AlbumsContainerProps } from "./types";
+import { Albums } from "./types";
 
-export const AlbumsContainer: FC<AlbumsContainerProps> = ({ data }) => {
+export const AlbumsContainer: FC = () => {
+  const { data } = useDataContext<Albums>();
+  const { themeMode } = useThemeContext();
+
   return (
     <>
       {
-        data.map((album: Albums, index) => (
-          <DataItem index={index} key={index}>
-            <p className='album-title'>{album.title}</p>
+        data.map(({ recordId, title, userId, id }) => (
+          <DataItem key={recordId} recordId={recordId}>
+            <p className={`album-title text-${themeMode}`}>{title}</p>
             <div className='data-user-id'>
-              <p className='small-text'>User's id: {album.userId}</p>
-              <p className='small-text'>Album №: {album.id}</p>
+              <p className='small-text'>User's id: {userId}</p>
+              <p className='small-text'>Album №: {id}</p>
             </div>
-            <DeleteButton data={data} />
           </DataItem>
         ))
       }

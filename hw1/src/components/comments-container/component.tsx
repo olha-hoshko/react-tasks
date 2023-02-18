@@ -1,22 +1,25 @@
 import { FC } from "react";
+import { useDataContext } from "../../context/data-context";
+import { useThemeContext } from "../../context/theme-context";
 import { DataItem } from "../data-item";
-import { DeleteButton } from "../delete-button";
-import { Comments, CommentsContainerProps } from "./types";
+import { Comments } from "./types";
 
-export const CommentsContainer: FC<CommentsContainerProps> = ({ data }) => {
+export const CommentsContainer: FC = () => {
+  const { data } = useDataContext<Comments>();
+  const { themeMode } = useThemeContext();
+
   return (
     <>
       {
-        data.map((comment: Comments, index) => (
-          <DataItem index={index} key={index}>
-            <p className='comment-email'>{comment.email}</p>
-            <p className='comment-title'>{comment.name}</p>
-            <p className='comment-body'>{comment.body}</p>
+        data.map(({ recordId, email, name, body, postId, id }) => (
+          <DataItem key={recordId} recordId={recordId}>
+            <p className={`comment-email text-${themeMode}`}>{email}</p>
+            <p className={`comment-title text-${themeMode}`}>{name}</p>
+            <p className={`comment-body text-${themeMode}`}>{body}</p>
             <div className='data-comment-post'>
-              <p className='small-text'>Post №: {comment.postId}</p>
-              <p className='small-text'>Comment's id: {comment.id}</p>
+              <p className='small-text'>Post №: {postId}</p>
+              <p className='small-text'>Comment's id: {id}</p>
             </div>
-            <DeleteButton data={data} />
           </DataItem>
         ))
       }
