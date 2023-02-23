@@ -1,0 +1,158 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+.App {
+  width: 100%;
+  height: 100%;
+  background-color: #2E2E2E;
+  display: flex;
+  align-items: center;
+}
+
+.chat-field {
+  flex: 4;
+  height: 95%;
+  border-radius: 5px;
+  margin: 0 1em;
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden;
+}
+
+.message-container {
+  flex: 9;
+  background-color: #1E1E1E;
+  border-radius: 5px;
+  padding: 10px 0;
+
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.message-received,
+.message-send {
+  max-width: 40%;
+  min-height: 50px;
+  margin: 15px 10px;
+  padding: 5px;
+
+  display: flex;
+  align-items: flex-end;
+}
+
+.message-received {
+  align-self: start;
+}
+
+.message-send {
+  align-self: end;
+  justify-content: end;
+}
+
+.message-text {
+  flex: 10;
+  font-size: 15px;
+  padding: 8px;
+  word-wrap: break-word;
+  color: #c7c7c7;
+  background-color: #2E2E2E;
+  border-radius: 10px;
+}
+
+.message-user-pic {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: rgb(226, 226, 226);
+}
+
+.message-received > .message-user-pic {
+  margin: 0 15px 0 0;
+}
+
+.message-send > .message-user-pic {
+  margin: 0 0 0 15px;
+}
+
+.send-message-container {
+  flex: 1;
+  background-color: #2E2E2E;
+}
+
+.send-message-container>form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  overflow: hidden;
+}
+
+textarea {
+  resize: vertical;
+  max-height: 300px;
+  min-height: 50px;
+  padding: 5px;
+  width: 90%;
+  background-color: #1E1E1E;
+  color: #c7c7c7;
+  border: none;
+  border-radius: 10px;
+  margin: 10px 0 0 0;
+}
+
+.send-message-button {
+  width: 7%;
+  background-color: #1E1E1E;
+  color: #c7c7c7;
+  font-size: 18px;
+  height: 60px;
+  border: none;
+  border-radius: 10px;
+  margin: 10px 0 0 0;
+  cursor: pointer;
+}
+
+.users-list {
+  flex: 1;
+  height: 95%;
+  margin: 0 1em 0 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.user {
+  width: 100%;
+  margin: 10px;
+
+  display: flex;
+  align-items: center;
+  color: #c7c7c7;
+}
+
+.user-pic {
+  width: 40px;
+  height: 40px;
+  margin: 0 10px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: rgb(0, 0, 0);
+}
