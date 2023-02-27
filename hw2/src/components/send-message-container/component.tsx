@@ -2,7 +2,7 @@ import { ChangeEvent, FC, FormEventHandler, useState } from "react";
 import { useChatContext } from "../../context";
 
 export const SendMessageContainer: FC = () => {
-  const { socket } = useChatContext();
+  const { socket, receiver, messageSend } = useChatContext();
   const [message, setMessage] = useState('');
   const [textArea, setTextArea] = useState('');
 
@@ -14,11 +14,13 @@ export const SendMessageContainer: FC = () => {
   const handleSubmit: FormEventHandler = (event) => {
     event.preventDefault();
     if (message !== '') {
-      socket.emit('message', {
+      socket.emit('private-message', {
         text: message,
-        userId: socket.id
+        userId: socket.id,
+        to: receiver,
       });
     }
+    messageSend(socket.id);
     setMessage('');
     setTextArea('');
   };

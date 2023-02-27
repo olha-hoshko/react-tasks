@@ -6,6 +6,11 @@ const defaultChatContext: ContextProps = {
   messages: [],
   users: [],
   socket: io(),
+  isChatOpen: false,
+  receiver: '',
+  sender: '',
+  openCloseChat: () => { },
+  messageSend: () => { },
 }
 
 export const ChatContext = createContext(defaultChatContext);
@@ -14,9 +19,12 @@ export const useChatContext = () => useContext(ChatContext);
 export const ChatContextProvider: FC<ChatContextProviderProps> = ({ children, socket }) => {
   const [messages, setMessages] = useState<ReceivedMessage[]>([]);
   const [users, setUsers] = useState<string[]>([]);
+  const [isChatOpen, setIsChatOpen] = useState<boolean>(false);
+  const [receiver, setReceiver] = useState<string>('');
+  const [sender, setSender] = useState<string>('');
 
   useEffect(() => {
-    socket.on('messageResponse', (serverMessage) => setMessages([...messages, serverMessage]));
+    socket.on('private-message', (serverMessage) => setMessages([...messages, serverMessage]));
   }, [socket, messages]);
 
   const objectToArray = (obj: Object) => {
@@ -30,8 +38,17 @@ export const ChatContextProvider: FC<ChatContextProviderProps> = ({ children, so
     });
   }, [socket, users]);
 
+  const openCloseChat = (action: boolean, receiver: string) => {
+    setIsChatOpen(action);
+    setReceiver(receiver);
+  };
+
+  const messageSend = (sender: string) => {
+    setSender(sender);
+  }
+
   return (
-    <ChatContext.Provider value={{ messages, users, socket }}>
+    <ChatContext.Provider value={{ messages, users, socket, isChatOpen, openCloseChat, receiver, sender, messageSend }}>
       {children}
     </ChatContext.Provider>
   );

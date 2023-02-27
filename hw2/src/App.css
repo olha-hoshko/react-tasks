@@ -9,6 +9,7 @@ body,
 #root {
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
 .App {
@@ -19,7 +20,26 @@ body,
   align-items: center;
 }
 
-.chat-field {
+.greeting-field {
+  background-color: #1E1E1E;
+  align-items: center;
+  justify-content: center;
+}
+
+.greeting-field > p {
+  color: #c7c7c7;
+  padding: 10px 0;
+}
+
+.greeting {
+  font-size: 27px;
+}
+
+.greeting-small {
+  font-size: 17px;
+}
+
+.chat-field, .greeting-field {
   flex: 4;
   height: 95%;
   border-radius: 5px;
@@ -42,7 +62,7 @@ body,
 
 .message-received,
 .message-send {
-  max-width: 40%;
+  max-width: 80%;
   min-height: 50px;
   margin: 15px 10px;
   padding: 5px;
@@ -61,6 +81,7 @@ body,
 }
 
 .message-text {
+  max-width: 80%;
   flex: 10;
   font-size: 15px;
   padding: 8px;
@@ -138,12 +159,25 @@ textarea {
 }
 
 .user {
-  width: 100%;
+  width: 95%;
   margin: 10px;
 
   display: flex;
   align-items: center;
   color: #c7c7c7;
+  border-radius: 10px;
+  padding: 5px;
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.user:hover {
+  background-color: #666666;
+}
+
+.user-chosen {
+  background-color: #666666;
 }
 
 .user-pic {

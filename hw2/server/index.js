@@ -17,13 +17,24 @@ socketIO.on('connection', (socket) => {
   usersOnline[`${socket.id}`] = socket.id;
   socketIO.emit('users', usersOnline);
 
-  socket.on('message', (message) => {
-    socketIO.emit('messageResponse', message);
+  socket.on('private-message', ({ text, userId, to }) => {
+    console.log(`to: ${to}`);
+    socketIO.to(to).emit('private-message', {
+      text: text,
+      from: userId,
+      to: to,
+    });
+    console.log(`from: ${userId}`);
+    socketIO.to(userId).emit('private-message', {
+      text: text,
+      from: userId,
+      to: to,
+    });
   });
 
   socket.on('disconnect', () => {
     console.log('A user disconnected');
-    if(usersOnline[`${socket.id}`]) {
+    if (usersOnline[`${socket.id}`]) {
       delete usersOnline[`${socket.id}`];
     }
     socketIO.emit('users', usersOnline);

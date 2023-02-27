@@ -1,11 +1,30 @@
-import { FC } from "react";
+import { FC, MouseEventHandler } from "react";
+import { useChatContext } from "../../context";
 import { UserProps } from "./types";
 
 export const User: FC<UserProps> = ({ userId, userSymbol }) => {
+  const { openCloseChat, isChatOpen, receiver, socket } = useChatContext();
+
+  const handleClick: MouseEventHandler<HTMLDivElement> = () => {
+    openCloseChat(true, userId);
+  }
+
+  const currentChat = () => {
+    if (isChatOpen && receiver === userId) {
+      return 'user user-chosen';
+    }
+    return 'user';
+  }
+
   return (
-    <div className='user' id={`user${userId}`}>
+    <div className={currentChat()} id={`user${userId}`} onClick={handleClick}>
       <div className='user-pic'>{userSymbol}</div>
-      <p className='user-name'>User {userId}</p>
+      <p className='user-name'>
+        User {userId}
+        {
+          userId === socket.id && ` (you)`
+        }
+      </p>
     </div>
   );
 }
