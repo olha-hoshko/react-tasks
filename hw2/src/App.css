@@ -199,3 +199,15 @@ textarea {
   border-radius: 50%;
   background-color: rgb(0, 0, 0);
 }
+
+.user-name {
+  word-wrap: break-word;
+}
+
+.new-message-show {
+  display: block;
+}
+
+.new-message-hide {
+  display: none;
+}

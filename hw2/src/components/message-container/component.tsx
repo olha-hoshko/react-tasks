@@ -19,7 +19,6 @@ export const MessageContainer: FC = () => {
           if (message.from === getUserId() && message.to === receiver) {
             return <Message type={MessageTypes.send} userId={message.from} text={message.text} key={uuidv4()} />
           }
-          return <></>;
         })
       }
     </div>
