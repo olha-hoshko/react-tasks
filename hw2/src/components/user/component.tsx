@@ -19,12 +19,7 @@ export const User: FC<UserProps> = ({ userId, userSymbol }) => {
   return (
     <div className={currentChat()} id={`user${userId}`} onClick={handleClick}>
       <div className='user-pic'>{userSymbol}</div>
-      <p className='user-name'>
-        User {userId}
-        {
-          userId === socket.id && ` (you)`
-        }
-      </p>
+      <p className='user-name'> User {userId} </p>
     </div>
   );
 }

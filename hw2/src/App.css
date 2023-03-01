@@ -134,11 +134,13 @@ textarea {
   color: #c7c7c7;
   border: none;
   border-radius: 10px;
-  margin: 10px 0 0 0;
+  margin: 10px 1% 0 0;
 }
 
 .send-message-button {
+  min-width: fit-content;
   width: 7%;
+  padding: 0 5px;
   background-color: #1E1E1E;
   color: #c7c7c7;
   font-size: 18px;
@@ -156,6 +158,13 @@ textarea {
 
   display: flex;
   flex-direction: column;
+}
+
+.users-list-header {
+  width: 95%;
+  text-align: center;
+  color: #c7c7c7;
+  margin: 10px;
 }
 
 .user {
