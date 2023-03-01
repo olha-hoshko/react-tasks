@@ -1,9 +1,9 @@
 import { FC, MouseEventHandler } from "react";
-import { useChatContext } from "../../context";
+import { useChatContext } from "../../context/chat-context";
 import { UserProps } from "./types";
 
 export const User: FC<UserProps> = ({ userId, userSymbol }) => {
-  const { openCloseChat, isChatOpen, receiver, socket } = useChatContext();
+  const { openCloseChat, isChatOpen, receiver } = useChatContext();
 
   const handleClick: MouseEventHandler<HTMLDivElement> = () => {
     openCloseChat(true, userId);

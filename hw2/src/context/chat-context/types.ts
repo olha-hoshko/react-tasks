@@ -1,5 +1,4 @@
-import { Socket } from 'socket.io-client';
-import { ParentContainerProps, SocketProps } from '../global-types';
+import { ParentContainerProps } from '../../global-types';
 
 export type ReceivedMessage = {
   from: string,
@@ -10,12 +9,13 @@ export type ReceivedMessage = {
 export type ContextProps = {
   messages: ReceivedMessage[],
   users: string[],
-  socket: Socket,
   isChatOpen: boolean,
   openCloseChat: (action: boolean, receiver: string) => void,
   receiver: string,
   sender: string,
   messageSend: (sender: string) => void,
+  messageReceived: (serverMessage: ReceivedMessage) => void,
+  usersReceived: (newUsersArray: string[]) => void,
 }
 
-export type ChatContextProviderProps = ParentContainerProps & SocketProps;
+export type ChatContextProviderProps = ParentContainerProps;

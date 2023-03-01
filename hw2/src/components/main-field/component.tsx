@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { useChatContext } from "../../context";
+import { useChatContext } from "../../context/chat-context";
 import { ChatField } from "../chat-field";
 import { GreetingField } from "../greeting-field";
 import { MessageContainer } from "../message-container";
