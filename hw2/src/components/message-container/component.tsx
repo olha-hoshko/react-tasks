@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useRef } from "react";
 import { MessageTypes } from "../../enums";
 import { Message } from "../message/component";
 import { v4 as uuidv4 } from 'uuid';
@@ -8,6 +8,15 @@ import { useSocketContext } from "../../context/socket-context";
 export const MessageContainer: FC = () => {
   const { messages, receiver } = useChatContext();
   const { getUserId } = useSocketContext();
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   return (
     <div className='message-container'>
@@ -21,6 +30,7 @@ export const MessageContainer: FC = () => {
           }
         })
       }
+      <div ref={messagesEndRef}></div>
     </div>
   );
 }
