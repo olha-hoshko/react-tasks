@@ -23,10 +23,10 @@ export const MessageContainer: FC = () => {
       {
         messages.map((message: ReceivedMessage) => {
           if (message.to === getUserId() && message.from === receiver) {
-            return <Message type={MessageTypes.received} userId={message.from} text={message.text} key={uuidv4()} />
+            return <Message type={MessageTypes.received} userId={message.from} text={message.text} time={message.time} key={uuidv4()} />
           }
           if (message.from === getUserId() && message.to === receiver) {
-            return <Message type={MessageTypes.send} userId={message.from} text={message.text} key={uuidv4()} />
+            return <Message type={MessageTypes.send} userId={message.from} text={message.text} time={message.time} key={uuidv4()} />
           }
         })
       }

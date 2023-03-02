@@ -19,16 +19,20 @@ socketIO.on('connection', (socket) => {
 
   socket.on('private-message', ({ text, userId, to }) => {
     console.log(`to: ${to}`);
+    const now = new Date();
+    const messageTime = `${now.getHours() < 10 ? `0${now.getHours()}` : now.getHours()}:${now.getMinutes() < 10 ? `0${now.getMinutes()}` : now.getMinutes()}`;
     socketIO.to(to).emit('private-message', {
       text: text,
       from: userId,
       to: to,
+      time: messageTime,
     });
     console.log(`from: ${userId}`);
     socketIO.to(userId).emit('private-message', {
       text: text,
       from: userId,
       to: to,
+      time: messageTime,
     });
   });
 

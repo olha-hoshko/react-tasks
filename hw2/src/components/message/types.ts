@@ -4,4 +4,5 @@ export type MessageProps = {
   type: MessageTypes,
   userId: string,
   text: string,
+  time: string,
 }

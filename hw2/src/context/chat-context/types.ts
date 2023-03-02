@@ -4,6 +4,7 @@ export type ReceivedMessage = {
   from: string,
   text: string,
   to: string,
+  time: string,
 }
 
 export type ContextProps = {
