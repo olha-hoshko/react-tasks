@@ -1,16 +1,20 @@
 import { FC, MouseEventHandler, useEffect, useState } from "react";
-import { ReceivedMessage, useChatContext } from "../../context/chat-context";
+import { MessageDisplay } from "../../enums";
+import { useChat } from "../../features/chat";
+import { ReceivedMessage, useMessages } from "../../features/messages";
 import { UserProps } from "./types";
 
 export const User: FC<UserProps> = ({ userId, userSymbol }) => {
-  const { openCloseChat, isChatOpen, receiver, messages } = useChatContext();
-  const [newMessageDisplay, setNewMessageDisplay] = useState<string>('hide');
+  const { openCloseChat, isChatOpen } = useChat();
+  const { messages, receiver, setReceiver } = useMessages();
+  const [newMessageDisplay, setNewMessageDisplay] = useState<MessageDisplay>(MessageDisplay.hide);
   const [isCurrentChat, setIsCurrentChat] = useState<boolean>(false);
 
   const handleClick: MouseEventHandler<HTMLDivElement> = () => {
-    setNewMessageDisplay('hide');
+    setNewMessageDisplay(MessageDisplay.hide);
     setIsCurrentChat(true);
-    openCloseChat(true, userId);
+    openCloseChat(true);
+    setReceiver(userId);
   };
 
   const currentChat = () => {
@@ -26,9 +30,9 @@ export const User: FC<UserProps> = ({ userId, userSymbol }) => {
   useEffect(() => {
     if (messages.length > 0) {
       const lastReceivedMessage: ReceivedMessage = messages[messages.length - 1];
-      if(lastReceivedMessage.from === userId) {
-        if(!isChatOpen || (isChatOpen && !isCurrentChat)) {
-          setNewMessageDisplay('show');
+      if (lastReceivedMessage.from === userId) {
+        if (!isChatOpen || (isChatOpen && !isCurrentChat)) {
+          setNewMessageDisplay(MessageDisplay.show);
         }
       }
     }

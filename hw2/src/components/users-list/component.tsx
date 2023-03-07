@@ -1,10 +1,10 @@
 import { FC } from "react";
-import { useChatContext } from "../../context/chat-context";
 import { useSocketContext } from "../../context/socket-context";
+import { useUsers } from "../../features/users";
 import { User } from "../user/component";
 
 export const UsersList: FC = () => {
-  const { users } = useChatContext();
+  const { users } = useUsers();
   const { getUserId } = useSocketContext();
 
   return (

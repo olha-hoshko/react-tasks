@@ -2,11 +2,11 @@ import { FC, useEffect, useRef } from "react";
 import { MessageTypes } from "../../enums";
 import { Message } from "../message/component";
 import { v4 as uuidv4 } from 'uuid';
-import { ReceivedMessage, useChatContext } from "../../context/chat-context";
 import { useSocketContext } from "../../context/socket-context";
+import { ReceivedMessage, useMessages } from "../../features/messages";
 
 export const MessageContainer: FC = () => {
-  const { messages, receiver } = useChatContext();
+  const { messages, receiver } = useMessages();
   const { getUserId } = useSocketContext();
   const messagesEndRef = useRef<HTMLDivElement>(null);
 

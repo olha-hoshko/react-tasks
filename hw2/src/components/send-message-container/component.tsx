@@ -1,9 +1,9 @@
-import { ChangeEvent, FC, FormEventHandler, useRef, useState, KeyboardEvent, useEffect } from "react";
-import { useChatContext } from "../../context/chat-context";
+import { ChangeEvent, FC, FormEventHandler, useRef, useState, KeyboardEvent } from "react";
 import { useSocketContext } from "../../context/socket-context";
+import { useMessages } from "../../features/messages";
 
 export const SendMessageContainer: FC = () => {
-  const { receiver, messageSend } = useChatContext();
+  const { receiver, messageSend } = useMessages();
   const { sendMessageToServer, getUserId } = useSocketContext();
   const [message, setMessage] = useState('');
   const [textArea, setTextArea] = useState('');
@@ -14,6 +14,9 @@ export const SendMessageContainer: FC = () => {
     setMessage(event.target.value);
     setTextArea(event.target.value);
     event.target.style.height = event.target.scrollHeight + 'px';
+    if(event.target.value === '') {
+      event.target.style.height = '60px';
+    }
   };
 
   const handleEnterPress = (event: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -33,6 +36,7 @@ export const SendMessageContainer: FC = () => {
       textareaRef.current.style.height = '60px';
     }
   };
+
 
   return (
     <div className='send-message-container'>
